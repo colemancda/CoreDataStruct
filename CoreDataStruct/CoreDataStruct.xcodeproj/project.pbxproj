@@ -14,7 +14,6 @@
 		6EDE4EA21BEB286D0024CE21 /* Discussion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EDE4EA11BEB286D0024CE21 /* Discussion.swift */; };
 		6EDE4EA41BEB2ACB0024CE21 /* Decode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EDE4EA31BEB2ACB0024CE21 /* Decode.swift */; };
 		6EDE4EA61BEB2C130024CE21 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EDE4EA51BEB2C130024CE21 /* Comment.swift */; };
-		6EDE4EA81BEB2EE30024CE21 /* CoreDataValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EDE4EA71BEB2EE30024CE21 /* CoreDataValue.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,7 +37,6 @@
 		6EDE4EA11BEB286D0024CE21 /* Discussion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Discussion.swift; sourceTree = "<group>"; };
 		6EDE4EA31BEB2ACB0024CE21 /* Decode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Decode.swift; sourceTree = "<group>"; };
 		6EDE4EA51BEB2C130024CE21 /* Comment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
-		6EDE4EA71BEB2EE30024CE21 /* CoreDataValue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataValue.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,7 +82,6 @@
 				6EDE4E881BEB27780024CE21 /* CoreDataStruct.h */,
 				6EDE4E9F1BEB27C30024CE21 /* Encode.swift */,
 				6EDE4EA31BEB2ACB0024CE21 /* Decode.swift */,
-				6EDE4EA71BEB2EE30024CE21 /* CoreDataValue.swift */,
 				6EDE4E8A1BEB27780024CE21 /* Info.plist */,
 			);
 			path = CoreDataStruct;
@@ -210,7 +207,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				6EDE4EA01BEB27C30024CE21 /* Encode.swift in Sources */,
-				6EDE4EA81BEB2EE30024CE21 /* CoreDataValue.swift in Sources */,
 				6EDE4EA41BEB2ACB0024CE21 /* Decode.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -403,6 +399,7 @@
 				6EDE4E9B1BEB27780024CE21 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		6EDE4E9C1BEB27780024CE21 /* Build configuration list for PBXNativeTarget "CoreDataStructTests" */ = {
 			isa = XCConfigurationList;
@@ -411,6 +408,7 @@
 				6EDE4E9E1BEB27780024CE21 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
