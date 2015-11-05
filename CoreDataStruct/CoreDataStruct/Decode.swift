@@ -12,5 +12,5 @@ import CoreData
 /// Specifies how a type can be decoded from Core Data.
 public protocol CoreDataDecodable {
     
-    
+    init(managedObject: NSManagedObject)
 }

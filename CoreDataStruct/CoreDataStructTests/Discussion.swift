@@ -22,7 +22,7 @@ public struct Discussion: CoreDataEncodable, CoreDataDecodable {
     public var visibility: Category
     
     /// The identifiers of the comments.
-    public var comments: [String]
+    public var comments: [Comment]
 }
 
 public extension Discussion {

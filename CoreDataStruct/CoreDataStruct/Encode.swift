@@ -12,5 +12,5 @@ import CoreData
 /// Specifies how a type can be encoded to be stored with Core Data.
 public protocol CoreDataEncodable {
     
-    func toCoreData() -> [String: CoreDataValue]
+    func toCoreData(context: NSManagedObjectContext)
 }
