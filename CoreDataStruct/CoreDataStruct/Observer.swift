@@ -12,21 +12,40 @@ import CoreData
 /// Observes a managed object and updates a ```CoreDataDecodable```.
 public final class ManagedObjectObserver<Decodable: CoreDataDecodable> {
     
-    public var decodable: Decodable?
+    // MARK: - Properties
+    
+    public private(set) var decodable: Decodable?
     
     public let managedObject: NSManagedObject
     
     public let context: NSManagedObjectContext
     
+    public var event = ManagedObjectObserverEvent<Decodable>()
+    
+    // MARK: - Private Properties
+    
     private let privateObserver: PrivateManagedObjectObserver
+    
+    // MARK: - Initialization
     
     public init(managedObject: NSManagedObject, context: NSManagedObjectContext) {
         
         self.managedObject = managedObject
         self.context = context
         
+        self.decodable = Decodable.init(managedObject: managedObject)
+        
         self.privateObserver = PrivateManagedObjectObserver(managedObject: managedObject, context: context)
     }
+}
+
+// MARK: - Supporting Types
+
+public struct ManagedObjectObserverEvent<Decodable: CoreDataDecodable> {
+    
+    public var updated: Decodable -> () = { _ in }
+    
+    public var deleted: () -> () = { _ in }
 }
 
 // MARK: - Private
@@ -48,6 +67,8 @@ public final class ManagedObjectObserver<Decodable: CoreDataDecodable> {
         
         self.managedObject = managedObject
         self.context = context
+        
+        super.init()
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "managedObjectContextObjectsDidChange:", name: NSManagedObjectContextObjectsDidChangeNotification, object: context)
     }
@@ -79,19 +100,6 @@ public final class ManagedObjectObserver<Decodable: CoreDataDecodable> {
                 }
             }
         }
-        
-        if let insertedObjects = notification.userInfo?[NSInsertedObjectsKey] as! [NSManagedObject]? {
-            
-            for managedObject in insertedObjects {
-                
-                if managedObject === self.managedObject {
-                    
-                    self.delegate?.observer(self, managedObjectInserted: managedObject)
-                    
-                    return
-                }
-            }
-        }
     }
 }
 
@@ -99,25 +107,24 @@ private protocol PrivateManagedObjectObserverDelegate: class {
     
     func observer(observer: PrivateManagedObjectObserver, managedObjectUpdated managedObject: NSManagedObject)
     
-    func observer(observer: PrivateManagedObjectObserver, managedObjectInserted managedObject: NSManagedObject)
-    
     func observer(observer: PrivateManagedObjectObserver, managedObjectDeleted managedObject: NSManagedObject)
 }
 
 extension ManagedObjectObserver: PrivateManagedObjectObserverDelegate {
     
-    func observer(observer: PrivateManagedObjectObserver, managedObjectUpdated managedObject: NSManagedObject) {
+    private func observer(observer: PrivateManagedObjectObserver, managedObjectUpdated managedObject: NSManagedObject) {
         
+        let decodable = Decodable.init(managedObject: managedObject)
         
+        self.decodable = decodable
+        
+        self.event.updated(decodable)
     }
     
-    func observer(observer: PrivateManagedObjectObserver, managedObjectDeleted managedObject: NSManagedObject) {
+    private func observer(observer: PrivateManagedObjectObserver, managedObjectDeleted managedObject: NSManagedObject) {
         
+        self.decodable = nil
         
-    }
-    
-    func observer(observer: PrivateManagedObjectObserver, managedObjectInserted managedObject: NSManagedObject) {
-        
-        
+        self.event.deleted()
     }
 }
