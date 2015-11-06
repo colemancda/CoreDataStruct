@@ -14,8 +14,6 @@ public final class ManagedObjectObserver<Decodable: CoreDataDecodable> {
     
     // MARK: - Properties
     
-    public private(set) var decodable: Decodable?
-    
     public let managedObject: NSManagedObject
     
     public let context: NSManagedObjectContext
@@ -32,8 +30,6 @@ public final class ManagedObjectObserver<Decodable: CoreDataDecodable> {
         
         self.managedObject = managedObject
         self.context = context
-        
-        self.decodable = Decodable.init(managedObject: managedObject)
         
         self.privateObserver = PrivateManagedObjectObserver(managedObject: managedObject, context: context)
     }
@@ -116,14 +112,10 @@ extension ManagedObjectObserver: PrivateManagedObjectObserverDelegate {
         
         let decodable = Decodable.init(managedObject: managedObject)
         
-        self.decodable = decodable
-        
         self.event.updated(decodable)
     }
     
     private func observer(observer: PrivateManagedObjectObserver, managedObjectDeleted managedObject: NSManagedObject) {
-        
-        self.decodable = nil
         
         self.event.deleted()
     }
