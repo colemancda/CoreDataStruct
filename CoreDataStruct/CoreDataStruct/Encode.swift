@@ -12,16 +12,22 @@ import CoreData
 /// Specifies how a type can be encoded to be stored with Core Data.
 public protocol CoreDataEncodable {
     
-    func save(context: NSManagedObjectContext) throws
+    func save(context: NSManagedObjectContext) throws -> NSManagedObject
 }
 
 public extension CollectionType where Generator.Element: CoreDataEncodable {
     
-    func save(context: NSManagedObjectContext) throws {
+    func save(context: NSManagedObjectContext) throws -> [NSManagedObject] {
+        
+        var managedObjects = [NSManagedObject]()
         
         for element in self {
             
-            try element.save(context)
+            let managedObject = try element.save(context)
+            
+            managedObjects.append(managedObject)
         }
+        
+        return managedObjects
     }
 }
