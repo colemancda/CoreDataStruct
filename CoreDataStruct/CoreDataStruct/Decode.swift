@@ -30,3 +30,11 @@ public extension NSManagedObjectContext {
         return decodables
     }
 }
+
+public extension CoreDataDecodable {
+    
+    static func fromManagedObjects(managedObjects: [NSManagedObject]) -> [Self] {
+        
+        return managedObjects.map { (managedObject) in return self.init(managedObject: managedObject) }
+    }
+}
