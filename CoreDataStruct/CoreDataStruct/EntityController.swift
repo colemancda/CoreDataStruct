@@ -16,9 +16,14 @@ public final class EntityController<Decodable: CoreDataDecodable> {
     
     public let entityName: String
     
-    public let identifier: (key: String, value: String)
-    
     public let context: NSManagedObjectContext
+    
+    public var identifier: (key: String, value: String) {
+        
+        get { return self.privateController.identifier }
+        
+        set { self.privateController.identifier = newValue }
+    }
     
     public var event = ManagedObjectObserverEvent<Decodable>()
     
@@ -31,7 +36,6 @@ public final class EntityController<Decodable: CoreDataDecodable> {
     public init(entityName: String, identifier: (key: String, value: String), context: NSManagedObjectContext) {
         
         self.entityName = entityName
-        self.identifier = identifier
         self.context = context
         
         self.privateController = PrivateEntityController(entityName: entityName, identifier: identifier, context: context)
@@ -53,9 +57,9 @@ public struct ManagedObjectObserverEvent<Decodable: CoreDataDecodable> {
     
     let entityName: String
     
-    let identifier: (key: String, value: String)
-    
     let context: NSManagedObjectContext
+    
+    var identifier: (key: String, value: String)
     
     weak var delegate: PrivateManagedObjectObserverDelegate?
     
