@@ -14,11 +14,9 @@
 		6EDE4E901BEB27780024CE21 /* CoreDataStruct.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EDE4E851BEB27780024CE21 /* CoreDataStruct.framework */; };
 		6EDE4E951BEB27780024CE21 /* CoreDataStructTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EDE4E941BEB27780024CE21 /* CoreDataStructTests.swift */; };
 		6EDE4EA01BEB27C30024CE21 /* Encode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EDE4E9F1BEB27C30024CE21 /* Encode.swift */; };
-		6EDE4EA21BEB286D0024CE21 /* Discussion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EDE4EA11BEB286D0024CE21 /* Discussion.swift */; };
 		6EDE4EA41BEB2ACB0024CE21 /* Decode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EDE4EA31BEB2ACB0024CE21 /* Decode.swift */; };
-		6EDE4EA61BEB2C130024CE21 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EDE4EA51BEB2C130024CE21 /* Comment.swift */; };
-		6EF117271BECE8CA00376373 /* Observer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EF117261BECE8CA00376373 /* Observer.swift */; };
-		6EF117281BECE8CC00376373 /* Observer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EF117261BECE8CA00376373 /* Observer.swift */; };
+		6EF117271BECE8CA00376373 /* EntityController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EF117261BECE8CA00376373 /* EntityController.swift */; };
+		6EF117281BECE8CC00376373 /* EntityController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EF117261BECE8CA00376373 /* EntityController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,10 +38,8 @@
 		6EDE4E941BEB27780024CE21 /* CoreDataStructTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStructTests.swift; sourceTree = "<group>"; };
 		6EDE4E961BEB27780024CE21 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6EDE4E9F1BEB27C30024CE21 /* Encode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Encode.swift; sourceTree = "<group>"; };
-		6EDE4EA11BEB286D0024CE21 /* Discussion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Discussion.swift; sourceTree = "<group>"; };
 		6EDE4EA31BEB2ACB0024CE21 /* Decode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Decode.swift; sourceTree = "<group>"; };
-		6EDE4EA51BEB2C130024CE21 /* Comment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
-		6EF117261BECE8CA00376373 /* Observer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Observer.swift; sourceTree = "<group>"; };
+		6EF117261BECE8CA00376373 /* EntityController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntityController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,7 +93,7 @@
 				6EDE4E881BEB27780024CE21 /* CoreDataStruct.h */,
 				6EDE4E9F1BEB27C30024CE21 /* Encode.swift */,
 				6EDE4EA31BEB2ACB0024CE21 /* Decode.swift */,
-				6EF117261BECE8CA00376373 /* Observer.swift */,
+				6EF117261BECE8CA00376373 /* EntityController.swift */,
 				6EDE4E8A1BEB27780024CE21 /* Info.plist */,
 			);
 			path = CoreDataStruct;
@@ -107,8 +103,6 @@
 			isa = PBXGroup;
 			children = (
 				6EDE4E941BEB27780024CE21 /* CoreDataStructTests.swift */,
-				6EDE4EA11BEB286D0024CE21 /* Discussion.swift */,
-				6EDE4EA51BEB2C130024CE21 /* Comment.swift */,
 				6EDE4E961BEB27780024CE21 /* Info.plist */,
 			);
 			path = CoreDataStructTests;
@@ -257,7 +251,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6EDD70C61BEC698900A0EF3B /* Encode.swift in Sources */,
-				6EF117281BECE8CC00376373 /* Observer.swift in Sources */,
+				6EF117281BECE8CC00376373 /* EntityController.swift in Sources */,
 				6EDD70C71BEC698900A0EF3B /* Decode.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -267,7 +261,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6EDE4EA01BEB27C30024CE21 /* Encode.swift in Sources */,
-				6EF117271BECE8CA00376373 /* Observer.swift in Sources */,
+				6EF117271BECE8CA00376373 /* EntityController.swift in Sources */,
 				6EDE4EA41BEB2ACB0024CE21 /* Decode.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -276,8 +270,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6EDE4EA21BEB286D0024CE21 /* Discussion.swift in Sources */,
-				6EDE4EA61BEB2C130024CE21 /* Comment.swift in Sources */,
 				6EDE4E951BEB27780024CE21 /* CoreDataStructTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

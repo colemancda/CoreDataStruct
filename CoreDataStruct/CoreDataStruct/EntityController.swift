@@ -1,5 +1,5 @@
 //
-//  Observer.swift
+//  EntityController.swift
 //  CoreDataStruct
 //
 //  Created by Alsey Coleman Miller on 11/6/15.
@@ -10,11 +10,13 @@ import Foundation
 import CoreData
 
 /// Observes a managed object and updates a ```CoreDataDecodable```.
-public final class ManagedObjectObserver<Decodable: CoreDataDecodable> {
+public final class EntityController<Decodable: CoreDataDecodable> {
     
     // MARK: - Properties
     
-    public let managedObject: NSManagedObject
+    public let entityName: String
+    
+    public let identifier: (key: String, value: String)
     
     public let context: NSManagedObjectContext
     
@@ -22,16 +24,17 @@ public final class ManagedObjectObserver<Decodable: CoreDataDecodable> {
     
     // MARK: - Private Properties
     
-    private let privateObserver: PrivateManagedObjectObserver
+    private let privateController: PrivateEntityController
     
     // MARK: - Initialization
     
-    public init(managedObject: NSManagedObject, context: NSManagedObjectContext) {
+    public init(entityName: String, identifier: (key: String, value: String), context: NSManagedObjectContext) {
         
-        self.managedObject = managedObject
+        self.entityName = entityName
+        self.identifier = identifier
         self.context = context
         
-        self.privateObserver = PrivateManagedObjectObserver(managedObject: managedObject, context: context)
+        self.privateController = PrivateEntityController(entityName: entityName, identifier: identifier, context: context)
     }
 }
 
@@ -46,9 +49,11 @@ public struct ManagedObjectObserverEvent<Decodable: CoreDataDecodable> {
 
 // MARK: - Private
 
-@objc private final class PrivateManagedObjectObserver: NSObject {
+@objc private final class PrivateEntityController: NSObject {
     
-    let managedObject: NSManagedObject
+    let entityName: String
+    
+    let identifier: (key: String, value: String)
     
     let context: NSManagedObjectContext
     
@@ -59,9 +64,10 @@ public struct ManagedObjectObserverEvent<Decodable: CoreDataDecodable> {
         NSNotificationCenter.defaultCenter().removeObserver(self, name: NSManagedObjectContextObjectsDidChangeNotification, object: self.context)
     }
     
-    init(managedObject: NSManagedObject, context: NSManagedObjectContext) {
+    init(entityName: String, identifier: (key: String, value: String), context: NSManagedObjectContext) {
         
-        self.managedObject = managedObject
+        self.entityName = entityName
+        self.identifier = identifier
         self.context = context
         
         super.init()
@@ -75,7 +81,7 @@ public struct ManagedObjectObserverEvent<Decodable: CoreDataDecodable> {
             
             for managedObject in updatedObjects {
                 
-                if managedObject === self.managedObject {
+                if managedObject.valueForKey(identifier.key) as? NSObject == identifier.value {
                     
                     self.delegate?.observer(self, managedObjectUpdated: managedObject)
                     
@@ -88,7 +94,7 @@ public struct ManagedObjectObserverEvent<Decodable: CoreDataDecodable> {
             
             for managedObject in deletedObjects {
                 
-                if managedObject === self.managedObject {
+                if managedObject.valueForKey(identifier.key) as? NSObject == identifier.value {
                     
                     self.delegate?.observer(self, managedObjectDeleted: managedObject)
                     
@@ -101,21 +107,21 @@ public struct ManagedObjectObserverEvent<Decodable: CoreDataDecodable> {
 
 private protocol PrivateManagedObjectObserverDelegate: class {
     
-    func observer(observer: PrivateManagedObjectObserver, managedObjectUpdated managedObject: NSManagedObject)
+    func observer(observer: PrivateEntityController, managedObjectUpdated managedObject: NSManagedObject)
     
-    func observer(observer: PrivateManagedObjectObserver, managedObjectDeleted managedObject: NSManagedObject)
+    func observer(observer: PrivateEntityController, managedObjectDeleted managedObject: NSManagedObject)
 }
 
-extension ManagedObjectObserver: PrivateManagedObjectObserverDelegate {
+extension EntityController: PrivateManagedObjectObserverDelegate {
     
-    private func observer(observer: PrivateManagedObjectObserver, managedObjectUpdated managedObject: NSManagedObject) {
+    private func observer(observer: PrivateEntityController, managedObjectUpdated managedObject: NSManagedObject) {
         
         let decodable = Decodable.init(managedObject: managedObject)
         
         self.event.updated(decodable)
     }
     
-    private func observer(observer: PrivateManagedObjectObserver, managedObjectDeleted managedObject: NSManagedObject) {
+    private func observer(observer: PrivateEntityController, managedObjectDeleted managedObject: NSManagedObject) {
         
         self.event.deleted()
     }
